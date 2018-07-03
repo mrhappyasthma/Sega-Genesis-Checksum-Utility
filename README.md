@@ -21,7 +21,7 @@ The script will then execute and verify the checksums match. If they match succe
 
 If the checksums do not match, you will be prompted with a y/n (yes or no) option to decide if you want the script to update the header checksum to match the computed checksum -- this should "fix" any issue for ROMs that have had their data manipulated:
 
-![Script execution example where the checksums do not match.](https://i.imgur.com/OXdRET2.jpg)
+![Script execution example where the checksums do not match.](https://i.imgur.com/i4DaYzD.jpg)
 
 *Note: Some games, such as [Sonic & Knuckles](https://en.wikipedia.org/wiki/Sonic_%26_Knuckles), lack checksum checks, possibly because of the time required to check the entire ROM. [[Source](https://segaretro.org/Checksum)]*
 
