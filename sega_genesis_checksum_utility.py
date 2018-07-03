@@ -27,6 +27,11 @@ def main():
 
   print 'Reading checksum from file...'
   with open(args.path[0], 'r+b') as genesis_file:
+    valid_genesis_file = verify_console_name_from_header(genesis_file)
+    if not valid_genesis_file:
+      print '\nERROR: File is not a valid Genesis or Mega Drive ROM file.'
+      return
+
     header_checksum = read_checksum_from_header(genesis_file)
     print 'Header checksum =',
     print_word(header_checksum)
@@ -110,6 +115,41 @@ def read_checksum_from_header(open_file):
   """
   open_file.seek(CHECKSUM_HEADER_OFFSET)
   return read_word_as_int(open_file)
+
+def read_checksum_from_header(open_file):
+  """Read the checksum value stored in the header metadata of the file.
+
+  Args:
+    open_file: An opened file object referencing the binary ROM for a genesis
+               game.
+
+  Returns:
+    An integer containing the checksum value.
+  """
+  open_file.seek(CHECKSUM_HEADER_OFFSET)
+  return read_word_as_int(open_file)
+
+
+def verify_console_name_from_header(open_file):
+  """Verify an `open_file` is a valid Genesis rom, by reading the console name
+  from the file's header.
+
+  Args:
+    open_file: An opened file object referencing the binary ROM for a genesis
+               game.
+
+  Returns:
+    True if the header of `open_file` contains the correct console name in the
+    right location.
+  """
+  CONSOLE_NAME_OFFSET = 0x100
+  open_file.seek(CONSOLE_NAME_OFFSET)
+  console_name = open_file.read(15)
+  if console_name == "SEGA MEGA DRIVE":
+    return True
+  if console_name[:12] == "SEGA GENESIS":
+    return True
+  return False
 
 
 def compute_checksum(open_file):
