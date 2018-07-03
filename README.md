@@ -11,7 +11,7 @@ According to this [2013 article](https://web.stanford.edu/group/htgg/cgi-bin/dru
 
 # ROM Layout
 
-All of this information is borrowed from [THE COMPLETE DOCUMENTATION ABOUT GENESIS ROM FORMAT](http://www.emulatronia.com/doctec/consolas/megadrive/genesis_rom.txt). (Note: A backed up copy of this text file can be found in the [Resources/](https://github.com/mrhappyasthma/Sega-Genesis-Checksum-Utility/tree/master/Resources) folder.)
+All of this information is borrowed from [THE COMPLETE DOCUMENTATION ABOUT GENESIS ROM FORMAT](http://www.emulatronia.com/doctec/consolas/megadrive/genesis_rom.txt). (Note: A backed up copy of this text file can be found in the [Resources/Backup/](https://github.com/mrhappyasthma/Sega-Genesis-Checksum-Utility/blob/master/Resources/Backup/) folder.)
 
 ```
 
@@ -38,7 +38,7 @@ H1F0:    Country in which the product                       13
 7:  Check sum, a two-bytes value (see "Calculating the Checksum")
 ```
 
-All of this information is borrowed from [THE COMPLETE DOCUMENTATION ABOUT GENESIS ROM FORMAT](http://www.emulatronia.com/doctec/consolas/megadrive/genesis_rom.txt). (Note: A backed up copy of this text file can be found in the [Resources/](https://github.com/mrhappyasthma/Sega-Genesis-Checksum-Utility/tree/master/Resources) folder.)
+All of this information is borrowed from [THE COMPLETE DOCUMENTATION ABOUT GENESIS ROM FORMAT](http://www.emulatronia.com/doctec/consolas/megadrive/genesis_rom.txt). (Note: A backed up copy of this text file can be found in the [Resources/Backup/](https://github.com/mrhappyasthma/Sega-Genesis-Checksum-Utility/blob/master/Resources/Backup/) folder.)
 
 
 # Calculating the Checksum (Algorithm)
