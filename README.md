@@ -1,13 +1,42 @@
 # Sega Genesis Checksum Utility
 A simple command line utility to verify (or correct) Sega Genesis ROM checksums.
 
+# Example Usage
+
+Simply execute the script with a single argument: the relative path to a Sega Genesis or Sega Mega Drive binary ROM file.
+
+```
+python sega_genesis_checksum_utility.py <path_to_file>
+```
+
+Or on Linux, you can simply execute the file as an executable:
+
+```
+./sega_genesis_checksum_utility.py <path_to_file>
+```
+
+The script will then execute and verify the checksums match. If they match successfully, you will see a success message like so:
+
+![Successful script execution output example.](https://i.imgur.com/XjasEpn.jpg)
+
+If the checksums do not match, you will be prompted with a y/n (yes or no) option to decide if you want the script to update the header checksum to match the computed checksum -- this should "fix" any issue for ROMs that have had their data manipulated:
+
+![Script execution example where the checksums do not match.](https://i.imgur.com/OXdRET2.jpg)
+
+*Note: Some games, such as [Sonic & Knuckles](https://en.wikipedia.org/wiki/Sonic_%26_Knuckles), lack checksum checks, possibly because of the time required to check the entire ROM. [[Source](https://segaretro.org/Checksum)]*
+
 # Background
+
+Sega Genesis / Sega Mega Drive games have a source of "tamper protection", which compares [checksum](https://en.wikipedia.org/wiki/Checksum) to ensure the ROM on the cartridge matches the intended checksum value. If someone attempted to manipulate the code on the cart, the checksum calculation would no longer match and the system would not load the game.
+
+> The most important data stored in the metadata, at least when determining if the ROM is good, is the "checksum." A checksum is used by companies like Nintendo and Sega to fight game piracy. The checksum is calculated through each company’s unique algorithm. At first, the ROMs were tested in emulators to see if they would run. If they passed the company’s checksum algorithm, they were considered good ROMs of the game. If a single byte in the ROM was different, the checksum wouldn’t calculate properly and thus, not run.
+*([Source](https://web.stanford.edu/group/htgg/cgi-bin/drupal/?q=node/1179))*
 
 The intent of this script is to be used alongside the [Retrode 2](http://www.retrode.org/), which can be purchased [here](https://www.dragonbox.de/en/71-retrode-2-cart-reader-4260416650091.html?search_query=retrode&results=7), for extracting Sega Genesis saves.
 
-According to this [2013 article](https://web.stanford.edu/group/htgg/cgi-bin/drupal/?q=node/1179) posted on Stanford 's website, the Retrode can be unreliable and occasionally read a ROM with a bad checksum. It's unclear if this is the fault of the device, or an issue with the ROM data itself for certain cartridges. Regardless, I decided to put the info in this document into a self-sufficient tool.
+According to this [2013 article](https://web.stanford.edu/group/htgg/cgi-bin/drupal/?q=node/1179) posted on Stanford 's website, the Retrode can be unreliable and occasionally read a ROM with a bad checksum. It's unclear if this is the fault of the device, or an issue with the ROM data itself for certain cartridges. Regardless, I decided to put together a simple tool, based off of this article, to detect and correct any invalid ROM checksums.
 
-(Note: Existing tools for this exist, such as this nifty interactive tool called [E.S.E by Kuwabara](https://www.romhacking.net/utilities/342/). However, as far as I can tell, it is not open sourced.)
+*(Note: Existing tools already exist, such as this nifty interactive tool called [E.S.E by Kuwabara](https://www.romhacking.net/utilities/342/). However, as far as I can tell, it is not open-source.)*
 
 # ROM Layout
 
