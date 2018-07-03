@@ -6,6 +6,7 @@
 # update the checksum to the "correct" computed value.
 #
 # Resources:
+#   - http://www.emulatronia.com/doctec/consolas/megadrive/genesis_rom.txt
 #   - https://web.stanford.edu/group/htgg/cgi-bin/drupal/?q=node/1179
 #   - https://segaretro.org/Checksum
 import argparse
