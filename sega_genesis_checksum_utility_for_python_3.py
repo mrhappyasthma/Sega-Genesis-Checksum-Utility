@@ -25,46 +25,46 @@ def main():
                                             'Genesis ROM binary.')
   args = parser.parse_args()
 
-  print 'Reading checksum from file...'
-  with open(args.path[0], 'r+b') as genesis_file:
+  print('Reading checksum from file...')
+  with open(args.path[0], 'rb') as genesis_file:
     valid_genesis_file = verify_console_name_from_header(genesis_file)
     if not valid_genesis_file:
-      print '\nERROR: File is not a valid Genesis or Mega Drive ROM file.'
+      print('\nERROR: File is not a valid Genesis or Mega Drive ROM file.')
       return
 
     header_checksum = read_checksum_from_header(genesis_file)
-    print 'Header checksum =',
+    print('Header checksum =',)
     print_word(header_checksum)
 
-    print 'Computing checksum...'
+    print('Computing checksum...')
     computed_checksum = compute_checksum(genesis_file)
-    print 'Computed checksum = ',
+    print('Computed checksum = ',)
     print_word(computed_checksum)
 
     if header_checksum == computed_checksum:
-      print '\nChecksums match. Horray!'
+      print('\nChecksums match. Horray!')
       return
 
-    print '\nWARNING: Checksums do not match!'
+    print('\nWARNING: Checksums do not match!')
     while(1):
-      data = raw_input('\nWould you like to update the header checksum to match'
+      data = input('\nWould you like to update the header checksum to match'
                        'match the computed checksum? (y/n)')
       if data == 'n':
         return
       if data != 'y':
         continue
 
-      print '\nWriting computed checksum to header...'
+      print('\nWriting computed checksum to header...')
       write_checksum_to_header(genesis_file, computed_checksum)
-      print 'Writing complete. The header should now be updated.'
-      print 'Verifying header checksum...'
+      print('Writing complete. The header should now be updated.')
+      print('Verifying header checksum...')
       header_checksum = read_checksum_from_header(genesis_file)
       if header_checksum == computed_checksum:
-        print '\nChecksums match. Horray!'
+        print('\nChecksums match. Horray!')
         return
       print('\nERROR: Failed to write to file. Are you sure you have '
             'permission?')
-      print 'Aborting script...'
+      print('Aborting script...')
       return
 
 
@@ -74,7 +74,7 @@ def print_word(word):
   Args:
     word: A integer containing a WORD value.
   """
-  print '0x{0:04X}'.format(word)
+  print('0x{0:04X}'.format(word))
 
 
 def read_byte_as_int(open_file):
@@ -142,12 +142,12 @@ def verify_console_name_from_header(open_file):
     True if the header of `open_file` contains the correct console name in the
     right location.
   """
-  CONSOLE_NAME_OFFSET = 0x100
-  open_file.seek(CONSOLE_NAME_OFFSET)
-  console_name = open_file.read(15)
+  memorybuffer = open_file.read()
+  memorybuffer[0x100:0x10c].decode('utf-8')
+  console_name = memorybuffer[0x100:0x10c].decode('utf-8')
   if console_name == "SEGA MEGA DRIVE":
     return True
-  if console_name[:12] == "SEGA GENESIS":
+  if console_name == "SEGA GENESIS":
     return True
   return False
 
@@ -168,7 +168,7 @@ def compute_checksum(open_file):
   checksum = 0
   file_size = os.path.getsize(open_file.name)
   NUM_BYTES_PER_WORD = 2
-  for i in xrange(open_file.tell(), file_size, NUM_BYTES_PER_WORD):
+  for i in range(open_file.tell(), file_size, NUM_BYTES_PER_WORD):
     word = read_word_as_int(open_file)
     checksum += word
 
