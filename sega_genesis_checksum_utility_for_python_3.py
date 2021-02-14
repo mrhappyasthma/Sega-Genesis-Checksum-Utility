@@ -144,9 +144,9 @@ def verify_console_name_from_header(open_file):
   """
   memorybuffer = open_file.read()
   console_name = memorybuffer[0x100:0x110].decode('utf-8')
-  if console_name == "SEGA MEGA DRIVE":
+  if console_name.strip() == "SEGA MEGA DRIVE":
     return True
-  if console_name == "SEGA GENESIS":
+  if console_name.strip() == "SEGA GENESIS":
     return True
   return False
 
