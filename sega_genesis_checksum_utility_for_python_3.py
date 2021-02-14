@@ -47,8 +47,7 @@ def main():
 
     print('\nWARNING: Checksums do not match!')
     while(1):
-      data = input('\nWould you like to update the header checksum to match'
-                       'match the computed checksum? (y/n)')
+      data = input('\nWould you like to update the header checksum to match the computed checksum? (y/n)')
       if data == 'n':
         return
       if data != 'y':
