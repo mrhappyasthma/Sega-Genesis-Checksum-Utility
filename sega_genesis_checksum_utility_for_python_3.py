@@ -26,7 +26,7 @@ def main():
   args = parser.parse_args()
 
   print('Reading checksum from file...')
-  with open(args.path[0], 'rb') as genesis_file:
+  with open(args.path[0], 'r+b') as genesis_file:
     valid_genesis_file = verify_console_name_from_header(genesis_file)
     if not valid_genesis_file:
       print('\nERROR: File is not a valid Genesis or Mega Drive ROM file.')
