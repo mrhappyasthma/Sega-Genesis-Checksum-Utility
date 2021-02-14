@@ -27,21 +27,21 @@ def main():
 
   print('Reading checksum from file...')
   with open(args.path[0], 'r+b') as genesis_file:
-    valid_genesis_file = verify_console_name_from_header(genesis_file)
+    valid_genesis_file = verify_console_name_from_header(genesis_file) #veryfies if it is a valid MEGA DRIVE file
     if not valid_genesis_file:
       print('\nERROR: File is not a valid Genesis or Mega Drive ROM file.')
       return
 
-    header_checksum = read_checksum_from_header(genesis_file)
+    header_checksum = read_checksum_from_header(genesis_file) #get the checksum from the file
     print('Header checksum =',)
-    print_word(header_checksum)
+    print_word(header_checksum)#print the header checksum
 
     print('Computing checksum...')
-    computed_checksum = compute_checksum(genesis_file)
+    computed_checksum = compute_checksum(genesis_file) #computed the checksum
     print('Computed checksum = ',)
     print_word(computed_checksum)
 
-    if header_checksum == computed_checksum:
+    if header_checksum == computed_checksum: #if the computed checksum and retrived checksum are same then it is a valid file
       print('\nChecksums match. Horray!')
       return
 
@@ -73,7 +73,7 @@ def print_word(word):
   Args:
     word: A integer containing a WORD value.
   """
-  print('0x{0:04X}'.format(word))
+  print('0x{0:04X}'.format(word)) #print the hex value in a readable format
 
 
 def read_byte_as_int(open_file):
@@ -142,7 +142,7 @@ def verify_console_name_from_header(open_file):
     right location.
   """
   memorybuffer = open_file.read()
-  console_name = memorybuffer[0x100:0x110].decode('utf-8')
+  console_name = memorybuffer[0x100:0x110].decode('utf-8') #get the 15bits console_name and decode it with unicode
   if console_name.strip() == "SEGA MEGA DRIVE":
     return True
   if console_name.strip() == "SEGA GENESIS":
